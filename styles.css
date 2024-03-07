@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+}
+.button-container {
+    margin-left: 20px;
+}
+
+.pause-button {
+    cursor: pointer;
+}
