@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Video Source</title>
+</head>
+<body>
+  <input type="text" id="videoPath" placeholder="Enter video path or URL">
+  <button onclick="changeVideoSource()">Change Video Source</button><br>
+  <video id="videoPlayer" width="400" controls>
+    <source id="videoSource" src="" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    function changeVideoSource() {
+      var videoPath = document.getElementById('videoPath').value;
+      var videoSource = document.getElementById('videoSource');
+      videoSource.src = videoPath;
+      
+      var videoPlayer = document.getElementById('videoPlayer');
+      videoPlayer.load(); // Reload the video element to apply the new source
+    }
+  </script>
+</body>
+</html>
