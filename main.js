@@ -12,3 +12,4 @@ function embedVideo() {
 
     document.getElementById('videoContainer').innerHTML = iframeMarkup;
 }
+
