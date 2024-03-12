@@ -8,6 +8,7 @@
 <body>
   <input type="text" id="videoPath" placeholder="Enter video path or URL">
   <button onclick="changeVideoSource()">Change Video Source</button><br>
+  <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
   <video id="videoPlayer" width="400" controls>
     <source id="videoSource" src="" type="video/mp4">
     Your browser does not support the video tag.
@@ -16,6 +17,9 @@
   <script>
     function changeVideoSource() {
       var videoPath = document.getElementById('videoPath').value;
+      var videoPathDisplay = document.getElementById('videoPathDisplay'); // Select the paragraph element
+      videoPathDisplay.textContent = "Video Path: " + videoPath; // Set its text content
+      
       var videoSource = document.getElementById('videoSource');
       videoSource.src = videoPath;
       
