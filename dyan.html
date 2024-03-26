@@ -6,15 +6,25 @@
   <title>Dynamic Video Source</title>
 </head>
 <body>
-  <input type="text" id="videoPath" placeholder="Enter video path or URL">
-  <button onclick="changeVideoSource()">Change Video Source</button><br>
-  <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
-  <video id="videoPlayer" width="400" controls>
-    <source id="videoSource" src="" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <div>
+    <input type="text" id="videoPath" placeholder="Enter video path or URL">
+    <button onclick="changeVideoSource()">Change Video Source</button><br>
+    <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
+    <video id="videoPlayer" width="400" controls>
+      <source id="videoSource" src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <button onmouseup="storeTime()">
+    <p>Store Time</p>
+  </button>
+
+    <div id="buttonContainer"></div>
+
 
   <script>
+    var timeValues = [];
     function changeVideoSource() {
       var videoPath = document.getElementById('videoPath').value;
       var videoPathDisplay = document.getElementById('videoPathDisplay'); // Select the paragraph element
@@ -25,7 +35,44 @@
       
       var videoPlayer = document.getElementById('videoPlayer');
       videoPlayer.load(); // Reload the video element to apply the new source
+      logCurrentTime();
     }
+    function logCurrentTime() {
+    var videoPlayer = document.getElementById('videoPlayer');
+    setInterval(function() {
+      console.log("Current Time:" + videoPlayer.currentTime);
+    }, 1000);
+    return videoPlayer.currentTime;
+  }
+
+    function storeTime() {
+    var videoPlayer = document.getElementById('videoPlayer');
+    var currentTime = videoPlayer.currentTime;
+    
+    if (!timeValues.includes(currentTime)) {
+      timeValues.push(currentTime);
+      createButtons();
+    }
+  }
+
+    function createButtons() {
+      var container = document.getElementById('buttonContainer');
+      container.innerHTML = '';
+      timeValues.forEach(function(time, index) {
+        var button = document.createElement('button');
+        button.textContent = 'Time ' + (index + 1) + ': ' + time;
+        button.onmouseup = function() {
+          var videoPlayer = document.getElementById('videoPlayer');
+          videoPlayer.currentTime = time;
+        };
+        container.appendChild(button);
+      });
+    }
+
+
+    
   </script>
+
+
 </body>
 </html>
