@@ -10,10 +10,54 @@
     <input type="text" id="videoPath" placeholder="Enter video path or URL">
     <button onclick="changeVideoSource()">Change Video Source</button><br>
     <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
-    <video id="videoPlayer" width="400" controls>
-      <source id="videoSource" src="" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class='video_controls'>
+      <video id="videoPlayer" width="70%" controls>
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="buttonContainer">
+        <button onmouseup="jumpToLast()">
+          <p>Jump To Last</p>
+        </button>
+
+        <div class = "ForwardBack">
+          <button onmouseup="goForward10S()">
+            <p>+10s</p>
+          </button>
+
+          <button onmouseup="goBack10S()">
+            <p>-10s</p>
+        </div>
+        <div class="loopBack">
+          <input type="checkbox" id="loopCheckbox" onchange="loopBetweenLast2StopPoints()">
+          <label for="loopCheckbox">Loop Between Last 2 Stop Points</label>
+        </div>
+    </div>
+      
+    </div>
+    
+    <style>
+        .video_controls {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+    }
+
+    .buttonContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 2%;
+    }
+
+    .ForwardBack {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+    </style>
   </div>
 
   <button onmouseup="storeTime()">
@@ -55,24 +99,78 @@
     }
   }
 
-    function createButtons() {
-      var container = document.getElementById('buttonContainer');
-      container.innerHTML = '';
-      timeValues.forEach(function(time, index) {
-        var button = document.createElement('button');
-        button.textContent = 'Time ' + (index + 1) + ': ' + time;
-        button.onmouseup = function() {
-          var videoPlayer = document.getElementById('videoPlayer');
-          videoPlayer.currentTime = time;
-        };
-        container.appendChild(button);
-      });
+  function createButtons() {
+  var container = document.getElementById('buttonContainer');
+  container.innerHTML = '';
+  timeValues.forEach(function(time, index) {
+    var div = document.createElement('div');
+    var button = document.createElement('button');
+    var delBut = document.createElement('button');
+    delBut.textContent = 'Delete This';
+    delBut.onmouseup = function() {
+      timeValues.splice(index, 1); // Delete the time at the current index
+      container.removeChild(div); // Remove the div containing the button
+    };
+    button.textContent = 'Time ' + (index + 1) + ': ' + time;
+    button.onmouseup = function() {
+      var videoPlayer = document.getElementById('videoPlayer');
+      videoPlayer.currentTime = time;
+      timeValues.splice(index, 1); // Delete the time at the current index
+    };
+    div.appendChild(button);
+    div.appendChild(delBut);
+    container.appendChild(div);
+  });
+}
+
+  function jumpToLast() {
+    var videoPlayer = document.getElementById('videoPlayer');
+    var lastTime = timeValues[timeValues.length - 1];
+    videoPlayer.currentTime = lastTime;
+  }
+
+
+  function goForward10S() {
+    var videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.currentTime += 10;
+  }
+
+
+  function goBack10S() {
+    var videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.currentTime -= 10;
+  }
+
+
+  function loopBetweenLast2StopPoints() {
+    var checkBoxState = document.getElementById('loopCheckbox');
+    var videoPlayer = document.getElementById('videoPlayer');
+
+    if(checkBoxState.checked) {
+      var lastTime = timeValues[timeValues.length - 1];
+      var secondLastTime = timeValues[timeValues.length - 2];
+      videoPlayer.currentTime = secondLastTime;
+      videoPlayer.ontimeupdate = function() {
+        if (videoPlayer.currentTime >= lastTime) {
+          videoPlayer.currentTime = secondLastTime;
+        }
+      };
+    } else {
+      videoPlayer.ontimeupdate = null; // Remove the event handler when the checkbox is unchecked
     }
+  }
 
 
-    
   </script>
 
 
 </body>
 </html>
+
+
+//Todo:
+
+// Split into js and css files
+// Add comments
+// add a way to import videos from youtube
+
