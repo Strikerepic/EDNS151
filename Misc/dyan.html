@@ -7,8 +7,8 @@
 </head>
 <body>
   <div>
-    <input type="text" id="videoPath" placeholder="Enter video path or URL">
-    <button onclick="changeVideoSource()">Change Video Source</button><br>
+    <input type="file" id="videoFile" accept=".mp4">
+      <button onclick="changeVideoSource()">Change Video Source</button>
     <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
     <div class='video_controls'>
       <video id="videoPlayer" width="70%" controls>
@@ -70,8 +70,8 @@
   <script>
     var timeValues = [];
     function changeVideoSource() {
-      var videoPath = document.getElementById('videoPath').value;
-      var videoPathDisplay = document.getElementById('videoPathDisplay'); // Select the paragraph element
+      var fileInput = document.getElementById('videoFile');
+      var filePath = URL.createObjectURL(fileInput.files[0]);
       videoPathDisplay.textContent = "Video Path: " + videoPath; // Set its text content
       
       var videoSource = document.getElementById('videoSource');

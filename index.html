@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Video Source</title>
+  <script src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+
 </head>
+
+<script src="main.js"></script>
+
+
 <body>
-    <h1>Welcome to the home page</h1>
-    <div class="container">
-        <div class="button-container">
-            <a href="dyan.html" class="button">Button</a>
+  <div>
+    <input type="file" id="videoFile" accept=".mp4" onchange="changeVideoSource()"> <!-- Add an input element to select the video file -->
+    <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
+    <div class='video_container'>
+      <video id="videoPlayer" width="70%" controls>
+        <source id="videoFile" src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="buttonContainer">
+        <button onmouseup="jumpToLast()" class="jumpToLast">
+          <p>Jump To Last</p>
+        </button>
+
+        <div class = "ForwardBack">
+          <button onmouseup="goForward10S()">
+            <p>+10s</p>
+          </button>
+
+          <button onmouseup="goBack10S()">
+            <p>-10s</p>
         </div>
-        <div>
-            <input type="text" id="youtubeLink" placeholder="Enter YouTube link here">
-            <button onclick="embedVideo()">Embed Video</button>
-            <div id="videoContainer"></div>
+        <div class="loopBack">
+          <input type="checkbox" id="loopCheckbox" onchange="loopBetweenLast2StopPoints()">
+          <label for="loopCheckbox">Loop Between Last 2 Stop Points</label>
         </div>
     </div>
-    <script src="main.js"></script>
+    </div>
+  </div>
+
+  <button onmouseup="storeTime()">
+    <p>Store Time</p>
+  </button>
+    <div id="buttonContainer"></div>
+
+
 </body>
 </html>

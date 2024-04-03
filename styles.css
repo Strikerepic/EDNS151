@@ -1,10 +1,25 @@
-.container {
+.video_container {
     display: flex;
-}
-.button-container {
-    margin-left: 20px;
-}
+    align-items: center;
+    justify-content: left;
+  }
 
-.pause-button {
-    cursor: pointer;
-}
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2%;
+  }
+
+  .ForwardBack {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .jumpToLast {
+    font-size: x-large;
+    border-radius: 2px;
+  }
