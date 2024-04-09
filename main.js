@@ -17,6 +17,8 @@ var timeValues = [];
         };
 
         reader.readAsDataURL(file);
+        timeValues.splice(0, timeValues.length);
+        createButtons();
     }
     function logCurrentTime() {
     var videoPlayer = document.getElementById('videoPlayer');
@@ -48,14 +50,20 @@ var timeValues = [];
       timeValues.splice(index, 1); // Delete the time at the current index
       container.removeChild(div); // Remove the div containing the button
     };
-    button.textContent = 'Time ' + (index + 1) + ': ' + time;
+    button.textContent = 'Time ' + (index + 1) + ': ' + Math.trunc(time);
     button.onmouseup = function() {
       var videoPlayer = document.getElementById('videoPlayer');
       videoPlayer.currentTime = time;
       timeValues.splice(index, 1); // Delete the time at the current index
     };
+    button.style.margin = '1px';
+    button.style.width = '3wh';
+    delBut.style.margin = '1px';
     div.appendChild(button);
     div.appendChild(delBut);
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'space-between';
     container.appendChild(div);
   });
 }
@@ -95,5 +103,16 @@ var timeValues = [];
     } else {
       videoPlayer.ontimeupdate = null; // Remove the event handler when the checkbox is unchecked
     }
+  }
+
+
+  function playVideo(){
+    var videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.play();
+  }
+
+  function stopVideo(){
+    var videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.pause();
   }
 

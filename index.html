@@ -17,36 +17,44 @@
   <div>
     <input type="file" id="videoFile" accept=".mp4" onchange="changeVideoSource()"> <!-- Add an input element to select the video file -->
     <p id="videoPathDisplay"></p> <!-- Add a paragraph element to display the video path -->
-    <div class='video_container'>
-      <video id="videoPlayer" width="70%" controls>
-        <source id="videoFile" src="" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="buttonContainer">
-        <button onmouseup="jumpToLast()" class="jumpToLast">
-          <p>Jump To Last</p>
+    <div class="buttonContainer">
+      <button onmouseup="jumpToLast()" class="jumpToLast">
+        <p>Jump To Last</p>
+      </button>
+      <div class = "ForwardBack">
+        <button onmouseup="goBack10S()" class="minus10">
+          <p>-10s</p>
         </button>
+        <button onmouseup="goForward10S()" class="plus10">
+          <p>+10s</p>
+      </div>
+      <div class="loopBack">
+        <button onmouseup="stopVideo()" class="stopVideo">
+          <p>Stop</p>
+        </button>
+        <button onmouseup="playVideo()" class="playVideo">
+          <p>Play</p>
+        </button>
+        <input type="checkbox" id="loopCheckbox" onchange="loopBetweenLast2StopPoints()">
+        <label for="loopCheckbox" class="loopLabel">Loop Between Last 2 Stop Points</label>
+      </div>
+  </div>
+    <div class='video_container'>
+      <video id="videoPlayer" style="max-width: 90%; height: 70vh;" controls></video>
+        <source id="videoFile" src="" type="video/mp4">
+        
+      </video>
 
-        <div class = "ForwardBack">
-          <button onmouseup="goForward10S()">
-            <p>+10s</p>
-          </button>
+      <div class="checkPointBox">
+        <button onmouseup="storeTime()">
+          <p>Store Time</p>
+        </button>
+          <div id="buttonContainer"></div>
+      </div>
 
-          <button onmouseup="goBack10S()">
-            <p>-10s</p>
-        </div>
-        <div class="loopBack">
-          <input type="checkbox" id="loopCheckbox" onchange="loopBetweenLast2StopPoints()">
-          <label for="loopCheckbox">Loop Between Last 2 Stop Points</label>
-        </div>
-    </div>
     </div>
   </div>
 
-  <button onmouseup="storeTime()">
-    <p>Store Time</p>
-  </button>
-    <div id="buttonContainer"></div>
 
 
 </body>

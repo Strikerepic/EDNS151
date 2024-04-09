@@ -1,25 +1,81 @@
 .video_container {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
+  .checkPointBox {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: left;
   }
 
   .buttonContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: left ;
     padding-left: 2%;
+  }
+
+  .jumpToLast {
+    font-size: large;
+    width: 100%;
   }
 
   .ForwardBack {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
   }
 
-  .jumpToLast {
-    font-size: x-large;
-    border-radius: 2px;
+  .plus10{
+    width: 500%;
+    padding: 2%;
+    margin: 1%;
+  }
+
+  .minus10{
+    width: 500%;
+    padding: 2%;
+    margin: 1%;
+  }
+
+  .loopBack{
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .loopLabel {
+    display: block;
+    font-size: 15pt;
+    height: 100%;
+    width: 50vh;
+    white-space: nowrap;
+  }
+
+  .playVideo {
+    height: 7vh;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 50dvh;
+  }
+
+  .stopVideo {
+    margin-right: 5%;
+    margin-left: 5%;
+    height: 7vh;
+    width: 50dvh;
+    height: 10%;
+    
   }
